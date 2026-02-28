@@ -32,7 +32,7 @@
 
 `react-splash-reveal` gives you gorgeous, GPU-accelerated splash screens out-of-the-box. Perfect for SaaS dashboards, landing pages, and creative portfolios. Enhance your user's first impression with zero added jank to your initial load time.
 
-✨ **[View the Live Interactive Demo](https://anshatripathi.github.io/react-splash-reveal)**
+✨ **[View the Live Interactive Demo](splashreveal.vercel.app)**
 
 ---
 
