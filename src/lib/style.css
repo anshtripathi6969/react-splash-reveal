@@ -1,0 +1,123 @@
+/* React Splash Reveal Base Styles */
+
+.sr-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--sr-bg, #000);
+  pointer-events: auto;
+  will-change: transform, opacity, clip-path;
+  transition: transform 0.8s cubic-bezier(0.76, 0, 0.24, 1),
+              opacity 0.8s cubic-bezier(0.76, 0, 0.24, 1),
+              clip-path 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.sr-splash.sr-phase-exiting {
+  pointer-events: none;
+}
+
+/* Animations ------------------------------- */
+
+/* 1. slide-up */
+.sr-anim-slide-up.sr-phase-exiting {
+  transform: translateY(-100%);
+}
+
+/* 2. slide-down */
+.sr-anim-slide-down.sr-phase-exiting {
+  transform: translateY(100%);
+}
+
+/* 3. fade */
+.sr-anim-fade.sr-phase-exiting {
+  opacity: 0;
+}
+
+/* 4. scale */
+.sr-anim-scale.sr-phase-exiting {
+  transform: scale(1.2);
+  opacity: 0;
+}
+
+/* 5. clip-reveal */
+.sr-anim-clip-reveal {
+  clip-path: circle(150% at 50% 50%);
+}
+.sr-anim-clip-reveal.sr-phase-exiting {
+  clip-path: circle(0% at 50% 50%);
+}
+
+/* 6. curtain */
+.sr-anim-curtain {
+  background-color: transparent !important;
+}
+.sr-curtains {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  z-index: -1; 
+}
+.sr-curtain-left, .sr-curtain-right {
+  width: 50%;
+  height: 100%;
+  transition: transform 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+  will-change: transform;
+}
+.sr-anim-curtain.sr-phase-exiting .sr-curtain-left {
+  transform: translateX(-100%);
+}
+.sr-anim-curtain.sr-phase-exiting .sr-curtain-right {
+  transform: translateX(100%);
+}
+.sr-anim-curtain.sr-phase-exiting .sr-content-wrapper {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+/* Content Element ------------------------------- */
+
+.sr-content-wrapper {
+  position: relative;
+  z-index: 10;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+/* Fade out logos faster than background for slide animations to look cleaner */
+.sr-anim-slide-up.sr-phase-exiting .sr-content-wrapper,
+.sr-anim-slide-down.sr-phase-exiting .sr-content-wrapper,
+.sr-anim-scale.sr-phase-exiting .sr-content-wrapper {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+/* Intro Animations ------------------------------- */
+
+@keyframes sr-logo-scale-bounce {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.sr-intro-logo-scale-bounce {
+  animation: sr-logo-scale-bounce 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Accessibility: Reduce Motion Preference */
+@media (prefers-reduced-motion: reduce) {
+  .sr-splash,
+  .sr-curtain-left,
+  .sr-curtain-right,
+  .sr-content-wrapper {
+    transition: opacity 0.5s ease !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+  .sr-splash.sr-phase-exiting {
+    opacity: 0 !important;
+  }
+  .sr-intro-logo-scale-bounce {
+    animation: none !important;
+  }
+}

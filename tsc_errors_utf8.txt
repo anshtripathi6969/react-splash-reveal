@@ -1,0 +1,2 @@
+﻿src/App.tsx(18,113): error TS2353: Object literal may only specify known properties, and 'dropShadow' does not exist in type 'Properties<string | number, string & {}>'.
+src/lib/SplashReveal.tsx(2,10): error TS1484: 'SplashRevealProps' is a type and must be imported using a type-only import when 'verbatimModuleSyntax' is enabled.
